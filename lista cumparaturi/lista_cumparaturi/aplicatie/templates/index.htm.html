@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cumpărături</title>
+    <style>
+        .cumpărat {
+            text-decoration: line-through;
+            color: green;
+        }
+        .necumpărat {
+            color: red;
+        }
+    </style>
+    <title>Lista cumparaturi</title>
+</head>
+<body>
+     <h1>Lista de Cumpărături</h1>
+
+    <ul>
+        {% for produs in produse %}
+            <li class="{% if produs.cumparat %}cumpărat{% else %}necumpărat{% endif %}">
+                {{ produs.nume }}
+                {% if not produs.cumparat %}
+                    <a href="{% url 'marcheaza_cumparat' produs.id %}">Marchează cumpărat</a>
+                {% endif %}
+                <a href="{% url 'sterge_produs' produs.id %}">Șterge</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'adauga_produs' %}">Adaugă un produs</a>
+
+</body>
+</html>
